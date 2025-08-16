@@ -2,14 +2,12 @@ const fastify = require('fastify')({ logger: true });
 const { connectDb, sequelize } = require('./config/database');
 require('dotenv').config();
 
-// Register CORS plugin
+
 fastify.register(require('@fastify/cors'), {
   origin: '*',
-  // ADD THIS LINE
   methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
 });
 
-// Register product routes
 fastify.register(require('./routes/productRoutes'), { prefix: '/api' });
 
 // Main function to start the server

@@ -1,6 +1,6 @@
 .sidebar {
-  display: none; /* Hidden on mobile */
-  width: 210px; /* DECREASED from 240px */
+  display: none; 
+  width: 210px; 
   background-color: var(--white);
   border-right: 1px solid var(--border-color);
   padding: 20px;
@@ -27,20 +27,20 @@
 }
 
 .menu li {
-  display: flex; /* ADDED for icon alignment */
-  align-items: center; /* ADDED for icon alignment */
-  gap: 10px; /* ADDED for spacing between icon and text */
-  padding: 10px; /* DECREASED top/bottom padding */
+  display: flex; 
+  align-items: center; 
+  gap: 10px;
+  padding: 10px; 
   cursor: pointer;
-  font-weight: 400; /* DECREASED from 500 */
-  font-size: 12px; /* DECREASED from default */
+  font-weight: 400; 
+  font-size: 12px; 
   border-radius: 6px;
 }
 
 .menu li svg {
   width: 16px;
   height: 16px;
-  fill: var(--text-light); /* Default icon color */
+  fill: var(--text-light); 
   flex-shrink: 0;
 }
 
@@ -51,11 +51,11 @@
 .menu li.active {
   background-color: var(--light-blue-bg);
   color: var(--primary-blue);
-  font-weight: bold; /* Keep active item bold */
+  font-weight: bold; 
 }
 
 .menu li.active svg {
-  fill: var(--primary-blue); /* Active icon color */
+  fill: var(--primary-blue);
 }
 
 @media screen and (min-width: 992px) {

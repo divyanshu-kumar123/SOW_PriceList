@@ -8,12 +8,10 @@ const TopNav = () => {
     return (
         <header className="top-nav">
             <div className="nav-left">
-                {/* Mobile Hamburger Menu */}
                 <button className="hamburger-btn mobile-only" aria-label="Menu">
                     <MenuIcon />
                 </button>
 
-                {/* Desktop Profile Info */}
                 <div className="user-profile desktop-only">
                     <div className="user-avatar">JA</div>
                     <div className="user-info">

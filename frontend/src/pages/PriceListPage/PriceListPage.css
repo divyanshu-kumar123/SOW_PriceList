@@ -7,7 +7,7 @@
 .page-body {
   display: flex;
   flex-grow: 1;
-  overflow: hidden; /* Prevent body scroll */
+  overflow: hidden; 
 }
 
 .main-content {
@@ -18,11 +18,7 @@
 }
 
 .content-area {
-  padding: 0; /* A little padding around the table */
-  overflow-y: auto; /* Enable scrolling for the content list */
+  padding: 0; 
+  overflow-y: auto; 
   flex-grow: 1;
 }
-
-/* NOTE: All the old rules for hiding .product-table-container have been removed. 
-  The responsive logic is now handled entirely within ProductTable.css.
-*/

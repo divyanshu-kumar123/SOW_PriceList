@@ -2,12 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import Tag from '../Tag/Tag';
 import './ProductTable.css';
 
-// --- Icon component definitions ---
 const SortArrow = ({ direction }) => <span className={`sort-arrow ${direction === 'descending' ? 'desc' : ''}`}>▲</span>;
 const ExpandArrowIcon = () => <svg className="row-icon" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path></svg>;
 const MoreIcon = () => <svg className="row-icon" viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>;
 
-const EditableInput = ({ value, name, onChange, onBlur, onKeyDown }) => { // 1. Receive onKeyDown prop
+const EditableInput = ({ value, name, onChange, onBlur, onKeyDown }) => { 
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -24,7 +23,7 @@ const EditableInput = ({ value, name, onChange, onBlur, onKeyDown }) => { // 1. 
             value={value}
             onChange={onChange}
             onBlur={onBlur}
-            onKeyDown={onKeyDown} // 2. Add onKeyDown event handler to the input
+            onKeyDown={onKeyDown} 
             className="editable-cell"
         />
     );
@@ -84,7 +83,7 @@ const ProductTable = ({
                                                     value={product[header.key]}
                                                     onChange={(e) => onInputChange(e, product.id)}
                                                     onBlur={() => onSaveProduct(product.id)}
-                                                    // 3. Define the function to pass to onKeyDown
+                                                    
                                                     onKeyDown={(e) => {
                                                         if (e.key === 'Enter') {
                                                             onSaveProduct(product.id);

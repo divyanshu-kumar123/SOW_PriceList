@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 
 const Product = sequelize.define('Product', {
-  // Model attributes are defined here
+  
   articleNo: {
     type: DataTypes.BIGINT, // Using BIGINT for larger article numbers
     allowNull: false,
@@ -24,11 +24,10 @@ const Product = sequelize.define('Product', {
     type: DataTypes.INTEGER,
   },
   description: {
-    type: DataTypes.TEXT, // Using TEXT for longer descriptions
+    type: DataTypes.TEXT, 
   },
 }, {
-  // Other model options go here
-  timestamps: true, // Automatically adds createdAt and updatedAt fields
+  timestamps: true, 
 });
 
 module.exports = Product;

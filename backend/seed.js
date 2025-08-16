@@ -1,7 +1,6 @@
 const { sequelize } = require('./config/database');
 const Product = require('./models/productModel');
 
-// 1. Generate the base array of 25 products
 const productsData = Array.from({ length: 25 }, (_, i) => ({
   articleNo: 123456780 + (i + 1),
   productName: `Test Product ${String.fromCharCode(65 + (i % 26))}${i + 1}. this is the test product`,
@@ -12,8 +11,8 @@ const productsData = Array.from({ length: 25 }, (_, i) => ({
   description: `This is the detailed description for product item #${i + 1}.`,
 }));
 
-// 2. Modify specific entries for testing purposes
-// Add a product with a very long name
+
+// Add a product with a very long name -- modified for testing
 if (productsData.length >= 3) {
   productsData[2].productName = 'This is an example of a product with an exceptionally long name to test how the UI handles text wrapping and overflow within a narrow column.';
 }
@@ -26,11 +25,9 @@ if (productsData.length >= 5) {
 // 3. The seeding function
 const seedDatabase = async () => {
   try {
-    // This command drops the table if it exists and recreates it from the model
     await sequelize.sync({ force: true });
     console.log('Database synced! Table recreated.');
 
-    // Bulk insert the modified product data
     await Product.bulkCreate(productsData);
     console.log('✅ Success! Products have been seeded.');
   } catch (error) {
