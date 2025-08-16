@@ -1,0 +1,71 @@
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 0 20px;
+    height: 60px;
+    flex-shrink: 0;
+  }
+  
+  .nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-name {
+    font-weight: bold;
+  }
+  
+  .user-company {
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+  
+  .flag-icon {
+    font-size: 24px;
+  }
+  
+  .hamburger-btn {
+    background: none;
+    border: none;
+    color: white;
+    padding: 0;
+  }
+  
+  .hamburger-btn svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+  }
+  
+  .desktop-only { display: none; }
+  .mobile-only { display: block; }
+  
+  @media screen and (min-width: 992px) {
+    .desktop-only { display: flex; }
+    .mobile-only { display: none; }
+  }

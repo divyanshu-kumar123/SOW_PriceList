@@ -1,0 +1,65 @@
+.sidebar {
+  display: none; /* Hidden on mobile */
+  width: 210px; /* DECREASED from 240px */
+  background-color: var(--white);
+  border-right: 1px solid var(--border-color);
+  padding: 20px;
+  flex-shrink: 0;
+  box-shadow: 4px 0px 12px rgba(0, 0, 0, 0.05);
+    z-index: 2;
+}
+
+.menu p {
+  color: var(--text-light);
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+  padding-bottom: 10px; 
+  border-bottom: 2px solid var(--primary-blue); 
+  text-align: center;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  display: flex; /* ADDED for icon alignment */
+  align-items: center; /* ADDED for icon alignment */
+  gap: 10px; /* ADDED for spacing between icon and text */
+  padding: 10px; /* DECREASED top/bottom padding */
+  cursor: pointer;
+  font-weight: 400; /* DECREASED from 500 */
+  font-size: 12px; /* DECREASED from default */
+  border-radius: 6px;
+}
+
+.menu li svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--text-light); /* Default icon color */
+  flex-shrink: 0;
+}
+
+.menu li:hover {
+  background-color: var(--background-grey);
+}
+
+.menu li.active {
+  background-color: var(--light-blue-bg);
+  color: var(--primary-blue);
+  font-weight: bold; /* Keep active item bold */
+}
+
+.menu li.active svg {
+  fill: var(--primary-blue); /* Active icon color */
+}
+
+@media screen and (min-width: 992px) {
+  .sidebar {
+    display: block;
+  }
+}

@@ -1,0 +1,21 @@
+:root {
+    --primary-blue: #0f7ee9;
+    --light-blue-bg: #e7f2fe;
+    --background-grey: #f4f6f9;
+    --border-color: #e0e0e0;
+    --text-color: #333;
+    --text-light: #757575;
+    --white: #ffffff;
+    --font-family: 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family);
+    background-color: var(--background-grey);
+    color: var(--text-color);
+}
+
+* {
+    box-sizing: border-box;
+}

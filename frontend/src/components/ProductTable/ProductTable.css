@@ -1,0 +1,83 @@
+.product-table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  table-layout: fixed;
+}
+
+.product-table-container th,
+.product-table-container td {
+  padding: 8px 3px; /* MINIMAL horizontal padding */
+  text-align: left;
+  vertical-align: middle;
+}
+
+.product-table-container th {
+  font-weight: bold;
+  color: var(--text-light);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+
+  /* --- ADDED FOR STICKY HEADER --- */
+  position: sticky;
+  top: 0;
+  background-color: var(--background-grey); /* Match the page background */
+  z-index: 1;
+  /* ------------------------------ */
+}
+
+
+
+/* --- Base Column Widths & Wrapping --- */
+.col-articleNo { width: 15%; }
+.col-productName { width: 30%; }
+.col-description { width: 25%; }
+
+.col-productName,
+.col-description {
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* --- Icons --- */
+.col-icon { width: 26px; text-align: center; }
+.row-icon { width: 20px; height: 20px; fill: var(--primary-blue); }
+.sort-arrow { display: inline-block; margin-left: 5px; font-size: 0.7em; transition: transform 0.2s ease-in-out; }
+.sort-arrow.desc { transform: rotate(180deg); }
+
+
+/* --- Row Expansion --- */
+.expanded-row td { padding: 0; }
+.expanded-details { background-color: #f9f9f9; padding: 15px; animation: slideDown 0.3s ease-out; }
+.expanded-details p { margin: 4px 0; }
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* --- Responsive Column Hiding & Width Redistribution --- */
+
+/* Tablet View */
+@media screen and (max-width: 992px) {
+  .hide-tablet {
+    display: none;
+  }
+
+  /* Re-distribute width to fill the space */
+  .col-articleNo { width: 25%; }
+  .col-productName { width: 55%; }
+  .col-price { width: 20%; }
+}
+
+/* Mobile View */
+@media screen and (max-width: 767px) {
+  .hide-mobile {
+    display: none;
+  }
+
+  /* Re-distribute width again for the narrowest view */
+  .col-productName { width: 70%; }
+  .col-price { width: 30%; }
+}
