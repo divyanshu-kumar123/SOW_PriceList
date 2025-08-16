@@ -5,43 +5,68 @@ import Controls from '../../components/Controls/Controls';
 import ProductTable from '../../components/ProductTable/ProductTable';
 import './PriceListPage.css';
 
-// The base URL for our API, imported from the .env file
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
-
 const PriceListPage = () => {
-    const [products, setProducts] = useState([]); // Initial state is now an empty array
-    const [isLoading, setIsLoading] = useState(true); // To show a loading message
-    const [error, setError] = useState(null); // To show any errors
-    
+    const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [sortConfig, setSortConfig] = useState({ key: 'articleNo', direction: 'ascending' });
     const [expandedRowId, setExpandedRowId] = useState(null);
+    const [editingCell, setEditingCell] = useState(null);
 
-    // useEffect hook to fetch data when the component mounts
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const response = await fetch(`${API_URL}/products`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+                if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
-                setProducts(data); // Set the fetched data into state
+                setProducts(data);
             } catch (error) {
-                setError(error.message); // Set error state if fetching fails
+                setError(error.message);
             } finally {
-                setIsLoading(false); // Stop loading, whether successful or not
+                setIsLoading(false);
             }
         };
-
         fetchProducts();
-    }, []); // The empty array [] means this effect runs only once
+    }, []);
 
+    const handleInputChange = (e, productId) => {
+        const { name, value } = e.target;
+        const updatedProducts = products.map(p =>
+            p.id === productId ? { ...p, [name]: value } : p
+        );
+        setProducts(updatedProducts);
+    };
+
+    const handleSaveProduct = async (productId) => {
+        const productToSave = products.find(p => p.id === productId);
+        if (!productToSave) return;
+
+        setEditingCell(null);
+
+        try {
+            const response = await fetch(`${API_URL}/products/${productId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(productToSave),
+            });
+            if (!response.ok) throw new Error('Failed to save product');
+            console.log(`Product ${productId} saved successfully!`);
+        } catch (err) {
+            console.error('Error saving product:', err);
+        }
+    };
+
+    const handleSetEditing = (productId, fieldName) => {
+        setEditingCell({ productId, fieldName });
+    };
+    
+    // THIS IS THE CORRECTED PART
     const sortedProducts = useMemo(() => {
         let sortableItems = [...products];
         if (sortConfig.key !== null) {
             sortableItems.sort((a, b) => {
-                // Handle numeric sorting for appropriate fields
                 const fieldsToSortAsNumbers = ['articleNo', 'inPrice', 'price', 'inStock'];
                 const valA = fieldsToSortAsNumbers.includes(sortConfig.key) ? parseFloat(a[sortConfig.key]) : a[sortConfig.key];
                 const valB = fieldsToSortAsNumbers.includes(sortConfig.key) ? parseFloat(b[sortConfig.key]) : b[sortConfig.key];
@@ -61,26 +86,25 @@ const PriceListPage = () => {
         }
         setSortConfig({ key, direction });
     };
-    
+
     const handleToggleExpand = (id) => {
         setExpandedRowId(prevId => (prevId === id ? null : id));
     };
 
-    // Helper function to render the main content
     const renderContent = () => {
-        if (isLoading) {
-            return <p style={{ textAlign: 'center' }}>Loading products...</p>;
-        }
-        if (error) {
-            return <p style={{ textAlign: 'center', color: 'red' }}>Error: {error}</p>;
-        }
+        if (isLoading) return <p style={{ textAlign: 'center' }}>Loading products...</p>;
+        if (error) return <p style={{ textAlign: 'center', color: 'red' }}>Error: {error}</p>;
         return (
-            <ProductTable 
-                products={sortedProducts} 
-                onSort={handleSort} 
+            <ProductTable
+                products={sortedProducts}
+                onSort={handleSort}
                 sortConfig={sortConfig}
                 expandedRowId={expandedRowId}
                 onToggleExpand={handleToggleExpand}
+                onInputChange={handleInputChange}
+                onSaveProduct={handleSaveProduct}
+                editingCell={editingCell}
+                onSetEditing={handleSetEditing}
             />
         );
     };

@@ -4,7 +4,9 @@ require('dotenv').config();
 
 // Register CORS plugin
 fastify.register(require('@fastify/cors'), {
-  origin: '*', 
+  origin: '*',
+  // ADD THIS LINE
+  methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
 });
 
 // Register product routes
@@ -16,10 +18,8 @@ const start = async () => {
     await connectDb();
     await sequelize.sync();
 
-    // The port needs to be from the environment variable Render provides
     const port = process.env.PORT || 3001;
-    // Render requires binding to host 0.0.0.0
-    await fastify.listen({ port, host: '0.0.0.0' }); 
+    await fastify.listen({ port, host: '0.0.0.0' });
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);

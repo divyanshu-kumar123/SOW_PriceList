@@ -1,11 +1,11 @@
 import React from 'react';
 import './Tag.css';
 
-const Tag = ({ value }) => {
+const Tag = ({ value, onClick }) => {
   return (
-    <span className="data-tag">
+    <div className="data-tag" onClick={onClick}>
       {value}
-    </span>
+    </div>
   );
 };
 

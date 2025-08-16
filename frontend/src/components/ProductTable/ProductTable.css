@@ -2,7 +2,6 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.8rem;
-  /* Auto layout allows columns to be dynamic */
 }
 
 .product-table-container th,
@@ -25,21 +24,17 @@
 }
 
 /* --- Dynamic Column Width & Wrapping --- */
-
-/* Columns with short, predictable data should not wrap */
 .col-articleNo, .col-price, .col-inPrice, .col-unit, .col-inStock {
   white-space: nowrap;
 }
-
-/* Columns with long, variable data can wrap and have constraints */
 .col-productName {
   min-width: 150px;
-  max-width: 280px; /* ADDED max-width to cap the column */
+  max-width: 280px;
   word-break: break-word;
 }
 .col-description {
   min-width: 200px;
-  max-width: 350px; /* ADDED max-width to cap the column */
+  max-width: 350px;
   word-break: break-word;
 }
 
@@ -59,14 +54,28 @@
 }
 
 /* --- Responsive Column Hiding --- */
-@media screen and (max-width: 992px) {
-  .hide-tablet {
-    display: none;
-  }
+@media screen and (max-width: 992px) { .hide-tablet { display: none; } }
+@media screen and (max-width: 767px) { .hide-mobile { display: none; } }
+
+
+/* --- STYLES FOR THE EDITABLE TAG-LIKE INPUTS --- */
+.editable-cell {
+  width: 100%;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  
+  /* Tag-like appearance */
+  border: 1px solid var(--border-color);
+  background-color: var(--white);
+  border-radius: 20px;
+  
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-@media screen and (max-width: 767px) {
-  .hide-mobile {
-    display: none;
-  }
+.editable-cell:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(15, 126, 233, 0.2); /* Adds a nice glow on focus */
 }
